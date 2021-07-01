@@ -571,14 +571,15 @@ if(interactive()) {
            w4 <- gwindow("Export results", visible=FALSE) 
            g4 <- ggroup(cont=w4, horizontal=FALSE) 
            
+           fl <- gformlayout(cont=g4)
+           formats<- c("CSV","EXCEL")
+           gformat <-gradio(formats, selected=1, horizontal=TRUE, cont=fl,index = TRUE, label="Select a format         ")
+           
+           
            l4 <- glabel("Path to save", container=g4)
            e2<- gedit(text = "", width = 25, cont=g4)
            l5 <- glabel("File name", container=g4)
            e3<- gedit(text = "", width = 25, cont=g4)
-           
-           fl <- gformlayout(cont=g4)
-           formats<- c("CSV","EXCEL")
-           gformat <-gradio(formats, selected=1, horizontal=TRUE, cont=fl,index = TRUE, label="Select a format         ")
            
            res <- as.numeric(confm$table)
            TP <- res[4] 
