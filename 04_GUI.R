@@ -80,9 +80,10 @@ if(interactive()) {
     num_alg <<- dim(seq_alg)[1]
     seq_alg$seq_accession <<- paste(as.character(rep(1,num_alg)),seq_alg$seq_accession, sep = '|')
     num <<- num_alg*10 #To have a 1:10 proportion
-    seq_nalg_total <<- db[ !(db$seq_accession %in% seq_alg$seq_accession), ] #Creates a non-allergen list from the allergen list found in WHO
+    seq_nalg_total <<- subset(db, !db$seq_accession %in% allergen_names_DF[,1]) #Creates a non-allergen list from the allergen list found in WHO
     num_nalg <<- dim(seq_nalg_total)[1]
     seq_nalg_total$seq_accession <<- paste(as.character(rep(0,num_nalg)),seq_nalg_total$seq_accession, sep = '|')
+    set.seed(29)
     seq_nalg <<- seq_nalg_total[sample(nrow(seq_nalg_total), num), ] #Extracts the desired number of proteins randomly.
     l10$widget$setText(dim(seq_alg)[1])
     l12$widget$setText(dim(seq_nalg_total)[1])
